@@ -46,7 +46,7 @@ class Server:
            page_size:
            data
         """
-        total_page = len(self.dataset()) 
+        total_page = len(self.dataset())
         if index is None or index < 0 or index >= total_page:
             index = 0
 
