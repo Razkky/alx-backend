@@ -28,4 +28,8 @@ class LRUCache(BaseCaching):
 
     def get(self, key):
         """Gets a key from the cache"""
-        return self.cache_data.get(key, None)
+        if key and key in self.cache_data:
+            self.keys.append(self.keys.pop(
+                self.keys.index(key)))
+            return self.cache_data.get(key, None)
+        return None
