@@ -24,9 +24,10 @@ def index():
 
     return render_template('2-index.html')
 
+@babel.localselector
 def get_locale() -> str:
     """Determine the best match with our supported languages"""
-    return requests.accept_language.best_match(app.Config['LANGUAGES'])
+    return requests.accept_languages.best_match(app.Config['LANGUAGES'])
 
 if __name__ == "__main__":
     app.run(debug=True)
