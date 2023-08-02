@@ -22,6 +22,7 @@ users = {
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
 
+
 @app.route('/', strict_slashes=False)
 def index():
     """Return index.html page"""
@@ -39,6 +40,7 @@ def get_locale() -> str:
             return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
+
 def get_user():
     """Returns a user dictionary or None if ID was not found"""
     if request.args.get('login_as'):
@@ -47,14 +49,15 @@ def get_user():
             return users.get(user)
     else:
         return None
-    
+
+
 @app.before_request
 def before_request():
     """Find user and set user as the global user on f.g.user"""
     user = get_user()
     if user:
         g.user = user
-    
+
 
 if __name__ == "__main__":
     app.run(debug=True)
