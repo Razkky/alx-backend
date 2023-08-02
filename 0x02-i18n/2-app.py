@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """This script conatain a flask application"""
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_babel import Babel
-import requests
 
 app = Flask(__name__)
 babel = Babel(app)
@@ -27,7 +26,7 @@ def index():
 @babel.localselector
 def get_locale() -> str:
     """Determine the best match with our supported languages"""
-    return requests.accept_languages.best_match(app.Config['LANGUAGES'])
+    return request.accept_languages.best_match(app.Config['LANGUAGES'])
 
 if __name__ == "__main__":
     app.run(debug=True)
