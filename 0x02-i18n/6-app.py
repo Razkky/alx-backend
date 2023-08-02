@@ -34,16 +34,17 @@ def index():
 def get_locale() -> str:
     """Determine the best match with our supported languages"""
 
+    if request.args.get('locale'):
+        locale = request.args.get('locale')
+        if locale in app.config['LANGUAGES']:
+            return locale
+
     if request.args.get('login_as'):
         user = users.get(int(request.args.get('login_as')))
         if user:
             locale = user['locale']
             if locale in app.config['LANGUAGES']:
                 return locale
-    if request.args.get('locale'):
-        locale = request.args.get('locale')
-        if locale in app.config['LANGUAGES']:
-            return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
